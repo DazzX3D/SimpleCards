@@ -1,2 +1,2 @@
-# ValidationCard
+# SimpleCards
 Just HTML / CSS / JavaScript
