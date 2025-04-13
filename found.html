@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- TITLE -->
+    <title>FOUND</title>
+
+    <!-- Styling -->
+    <style>
+        
+        html, body, *
+        {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        /* Card Container */
+        .card-container
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to top, #00FF9C 50%, whitesmoke 50%);
+            background-size: 100% 200%;
+            background-position: bottom;
+            animation: card-container-in .5s;
+        }
+
+        @keyframes card-container-in
+        {
+            0%
+            {
+                background-position: top;
+            }
+            100%
+            {
+                background-position: bottom;
+            }
+        }
+
+        /* Card */
+
+        .card
+        {
+            padding: .5em;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            width: 80%;
+            height: auto;
+            aspect-ratio: 1/1.1;
+            background-color: whitesmoke;
+            border-radius: 4px;
+            box-shadow: 0 .2em .1em 0em rgba(69, 69, 69, 0.6);
+            animation: card-container .5s;
+            position: relative;
+        }
+
+        @keyframes card-container
+        {
+            0%
+            {
+                opacity: 0;
+                top: 10vh;
+            }
+            100%
+            {
+                opacity: 1;
+                top: 0;
+            }
+        }
+
+        /* Card Image */
+
+        .card-image
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: auto;
+            flex: 1;
+            background-color: #73BBA3;
+        }
+
+        .card-image > img
+        {
+            padding: .5em;
+            scale: 80%;
+            background-color: whitesmoke;
+            border-radius: 50%;
+        }
+
+        /* Card Content */
+        .card-content
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            flex: 1;
+            gap: 10px;
+        }
+
+        .card-content div
+        {
+            padding-bottom: .3em;
+            width: 100%;
+            height: auto;
+            border-bottom: .1em solid rgba(69, 69, 69, 0.2);
+        }
+
+        /* Responsive */
+        @media screen and (min-width: 768px)
+        {
+            .card
+            {
+                width: 40%;
+            }
+        }
+
+        @media screen and (min-width: 1024px)
+        {
+            .card
+            {
+                width: 20%;
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <!-- HTML -->
+     <section class="card-container">
+        <div class="card">
+            
+            <div class="card-image">
+                <img src="assets/icons8-done-100.png">
+            </div>
+
+            <div class="card-content">
+                <div></div>
+                <div id="ticket_id"></div>
+                <div id="name"></div>
+                <div id="reservation_date"></div>
+            </div>
+
+        </div>
+     </section>
+
+     <!-- Javascript -->
+     <script>
+        // Get Element
+        const ticket_id = document.getElementById("ticket_id");
+        const name = document.getElementById("name");
+        const reservation_date = document.getElementById("reservation_date");
+        
+        const timeNow = new Date().toLocaleString();
+
+        // GET Url
+        const getUrl = new URLSearchParams(window.location.search);
+
+        // Get Parameters
+        const getTicketId = getUrl.get("ticket_id");
+        const getName = getUrl.get("name");
+        
+        // Validation
+        if (!getTicketId || !getName) {
+            alert("parameters not found, using default parameters");
+            ticket_id.innerHTML = `<b>Ticket ID : </b>1`;
+            name.innerHTML = `<b>Name : </b>John Doe`;
+            reservation_date.innerHTML = `<b>Reservation Date :</b> -`;1    
+        } else {
+            ticket_id.innerHTML = `<b>Ticket ID : </b>${getTicketId}`;
+            name.innerHTML = `<b>Name : </b>${getName}`;
+            reservation_date.innerHTML = `<b>Reservation Date :</b> <br> <small>${timeNow}</small>`;1    
+        }
+
+     </script>
+     
+</body>
+</html>
