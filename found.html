@@ -25,13 +25,29 @@
             align-items: center;
             width: 100%;
             height: 100vh;
-            background-color: #B0EBB4;
+            background: linear-gradient(to top, #B0EBB4 50%, whitesmoke 50%);
+            background-size: 100% 200%;
+            background-position: bottom;
+            animation: card-container-in .5s;
+        }
+
+        @keyframes card-container-in
+        {
+            0%
+            {
+                background-position: top;
+            }
+            100%
+            {
+                background-position: bottom;
+            }
         }
 
         /* Card */
 
         .card
         {
+            padding: .5em;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -41,7 +57,22 @@
             background-color: whitesmoke;
             border-radius: 4px;
             box-shadow: 0 .2em .1em 0em rgba(69, 69, 69, 0.6);
-            padding: .5em;
+            animation: card-container .5s;
+            position: relative;
+        }
+
+        @keyframes card-container
+        {
+            0%
+            {
+                opacity: 0;
+                top: 10vh;
+            }
+            100%
+            {
+                opacity: 1;
+                top: 0;
+            }
         }
 
         /* Card Image */
@@ -77,13 +108,29 @@
             gap: 10px;
         }
 
-
         .card-content div
         {
-            padding: .3em;
+            padding-bottom: .3em;
             width: 100%;
             height: auto;
             border-bottom: .1em solid rgba(69, 69, 69, 0.2);
+        }
+
+        /* Responsive */
+        @media screen and (min-width: 768px)
+        {
+            .card
+            {
+                width: 40%;
+            }
+        }
+
+        @media screen and (min-width: 1024px)
+        {
+            .card
+            {
+                width: 20%;
+            }
         }
 
     </style>
@@ -100,6 +147,7 @@
             </div>
 
             <div class="card-content">
+                <div></div>
                 <div id="ticket_id"></div>
                 <div id="name"></div>
                 <div id="reservation_date"></div>
@@ -133,7 +181,7 @@
         } else {
             ticket_id.innerHTML = `<b>Ticket ID : </b>${getTicketId}`;
             name.innerHTML = `<b>Name : </b>${getName}`;
-            reservation_date.innerHTML = `<b>Reservation Date :</b> <br> ${timeNow}`;1    
+            reservation_date.innerHTML = `<b>Reservation Date :</b> <br> <small>${timeNow}</small>`;1    
         }
 
      </script>
